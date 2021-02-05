@@ -1,5 +1,6 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Row, Col, Container } from 'react-bootstrap'
+import Footer from '../Footer'
 import Header from '../Header'
 import LeftMenu from '../LeftMenu'
 import './style.css'
@@ -8,14 +9,17 @@ const Layout = (props) => {
     return (
         <>
             <Header />
-            <Row style={{ minHeight: '100vh' }}>
-                <Col xs={12} md={2} >
-                    <LeftMenu />
-                </Col>
-                <Col xs={12} md={10}>
-                    {props.children}
-                </Col>
-            </Row>
+            <Container fluid="true">
+                <Row>
+                    <Col sm={2} >
+                        <LeftMenu />
+                    </Col>
+                    <Col sm={10}>
+                        {props.children}
+                    </Col>
+                </Row>
+            </Container>
+            {/* <Footer /> */}
         </>
     )
 }

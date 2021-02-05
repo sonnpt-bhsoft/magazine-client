@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row, Spinner } from 'react-bootstrap';
 import Input from '../../components/UI/Input'
 import background from '../../images/photo-1612169258149-cf4172d7c224.jfif';
 import { login } from '../../actions'
@@ -17,11 +17,17 @@ const Login = () => {
     const userLogin = (e) => {
         e.preventDefault()
         const user = {
-            email, 
+            email,
             password
         }
         console.log(user)
         dispatch(login(user))
+    }
+
+    if (auth.authenticating) {
+        return (
+            <Spinner className="spinner" animation="border" variant="primary" />
+        )
     }
 
     if (auth.authenticate) {
@@ -31,10 +37,10 @@ const Login = () => {
     return (
         <>
             <Row className="login-row">
-                <Col className="login-col" sm={8}>
+                <Col className="login-col" sm={9}>
                     <img className="background-img" src={background} alt="" />
                 </Col>
-                <Col style={{ backgroundColor: '#24292e' }} sm={4}>
+                <Col style={{ backgroundColor: '#24292e' }} sm={3}>
                     <div className="logo">
                         <h1><span style={{ fontSize: '5rem' }}>M</span>aga<span style={{ color: '#34ee4c' }}>zine</span></h1>
                         <div className="form-login">
@@ -53,9 +59,7 @@ const Login = () => {
                                     type="password"
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
-                                <Button onClick={() => { }} variant="primary" type="submit">
-                                    Submit
-                                </Button>
+                                <button type="submit" onClick={() => { }} className="btn btn-dark btn-lg btn-block">Sign in</button>
                             </Form>
                         </div>
                     </div>
